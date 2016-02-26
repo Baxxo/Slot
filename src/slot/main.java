@@ -13,7 +13,8 @@ import org.eclipse.swt.widgets.Button;
 public class main {
 	
 	public ArrayList<String> img = new ArrayList <>(); 
-
+	
+	int n = (int)Math.random();
 	protected Shell shell;
 
 	/**
