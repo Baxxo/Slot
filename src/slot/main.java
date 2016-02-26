@@ -19,19 +19,20 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class main {
-	
-	public ArrayList<String> img = new ArrayList <>(); 
+
+	public ArrayList<String> img = new ArrayList<>();
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
-	
-	int n= (int)Math.random();
+
+	int n;
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 
 	/**
 	 * Launch the application.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -75,26 +76,31 @@ public class main {
 		img.add("/slot/inguria.png");
 		img.add("/slot/prugna.png");
 		img.add("/slot/ua.png");
-		
+
 		Button btnGira = new Button(shell, SWT.NONE);
 		btnGira.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseDown(MouseEvent e) {		
-				lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(1)));
-				lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(0)));
-				lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(2)));
+			public void mouseDown(MouseEvent e) {
+				n  = (int) (Math.random()*9);
+				lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+				System.out.println(n);
+				n  =  (int) (Math.random()*9);
+				lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+				System.out.println(n);
+				n  =  (int) (Math.random()*9);
+				System.out.println(n);
+				lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
 			}
 		});
 		btnGira.setBounds(899, 10, 75, 25);
 		btnGira.setText("GIRA!");
-		
-		
+
 		lblNewLabel = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 256, 358);
-		
+
 		lblNewLabel_1 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_1.setBounds(272, 10, 234, 358);
-		
+
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_2.setBounds(512, 10, 234, 358);
 
