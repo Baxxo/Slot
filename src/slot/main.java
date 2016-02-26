@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Button;
 
 public class main {
 	
-	//public ArrayList<> img = new ArrayList <>(); 
+	public ArrayList<String> img = new ArrayList <>(); 
 
 	protected Shell shell;
 
