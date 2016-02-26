@@ -24,8 +24,6 @@ public class main {
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
-	
-	int n = (int)Math.random();
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
@@ -80,6 +78,9 @@ public class main {
 		btnGira.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {		
+				lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(1)));
+				lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(0)));
+				lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(2)));
 			}
 		});
 		btnGira.setBounds(899, 10, 75, 25);
@@ -87,15 +88,12 @@ public class main {
 		
 		
 		lblNewLabel = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(1)));
 		lblNewLabel.setBounds(10, 10, 256, 358);
 		
 		lblNewLabel_1 = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(0)));
 		lblNewLabel_1.setBounds(272, 10, 234, 358);
 		
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(2)));
 		lblNewLabel_2.setBounds(512, 10, 234, 358);
 
 	}
