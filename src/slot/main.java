@@ -24,6 +24,8 @@ public class main {
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
+	
+	
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
