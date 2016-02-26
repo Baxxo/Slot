@@ -25,7 +25,7 @@ public class main {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	
-	
+	int n= (int)Math.random();
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
