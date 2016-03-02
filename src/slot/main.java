@@ -44,7 +44,7 @@ public class main extends TimerTask {
 	public static void main (String[] args) {
 		TimerTask timerTask = new TimerTaskExample();
 		Timer timer = new Timer(true);
-		timer.scheduleAtFixedRate(timerTask, 0, 10 * 1000);
+		//timer.scheduleAtFixedRate(timerTask, 0, 10 * 1000);
 		try {
 			main window = new main();
 			window.open();
@@ -90,16 +90,46 @@ public class main extends TimerTask {
 		btnGira.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				
+					
+					Display.getCurrent().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							n  = (int) (Math.random()*50)+10;
+							for(int i=0;i<5;i++){
+							// TODO Auto-generated method stub
+							n  = (int) (Math.random()*9);
+							lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+							n  =  (int) (Math.random()*9);
+							lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+							n  =  (int) (Math.random()*9);
+							lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+							try {
+								Thread.sleep(500);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							System.out.println(i);
+							}
+						}
+						
+					});
+					
+					/*try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}*/
+				/*
 				if(cont < 10){
 					System.out.println("cont: " + cont);
 					n  = (int) (Math.random()*9);
 					lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					System.out.println(n);
 					n  =  (int) (Math.random()*9);
 					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					System.out.println(n);
 					n  =  (int) (Math.random()*9);
-					System.out.println(n);
 					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
 					cont++;
 				}else{
@@ -108,7 +138,7 @@ public class main extends TimerTask {
 					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
 					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
 					cont = 0;
-				}
+				}*/
 			}
 		});
 		btnGira.setBounds(899, 10, 75, 25);
