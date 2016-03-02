@@ -24,6 +24,7 @@ public class main {
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
+	private int cont;
 
 	int n;
 
@@ -81,15 +82,25 @@ public class main {
 		btnGira.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				n  = (int) (Math.random()*9);
-				lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-				System.out.println(n);
-				n  =  (int) (Math.random()*9);
-				lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-				System.out.println(n);
-				n  =  (int) (Math.random()*9);
-				System.out.println(n);
-				lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+				if(cont < 10){
+					System.out.println("cont: " + cont);
+					n  = (int) (Math.random()*9);
+					lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					System.out.println(n);
+					n  =  (int) (Math.random()*9);
+					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					System.out.println(n);
+					n  =  (int) (Math.random()*9);
+					System.out.println(n);
+					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					cont++;
+				}else{
+					n  = (int) (Math.random()*9);
+					lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+					cont = 0;
+				}
 			}
 		});
 		btnGira.setBounds(899, 10, 75, 25);
