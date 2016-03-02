@@ -17,8 +17,13 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+ 
 
-public class main {
+
+public class main extends TimerTask {
 
 	public ArrayList<String> img = new ArrayList<>();
 	public Label lblNewLabel;
@@ -36,7 +41,10 @@ public class main {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main (String[] args) {
+		TimerTask timerTask = new TimerTaskExample();
+		Timer timer = new Timer(true);
+		timer.scheduleAtFixedRate(timerTask, 0, 10 * 1000);
 		try {
 			main window = new main();
 			window.open();
@@ -115,5 +123,11 @@ public class main {
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_2.setBounds(512, 10, 234, 358);
 
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
