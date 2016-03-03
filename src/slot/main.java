@@ -127,8 +127,25 @@ public class main extends TimerTask implements Runnable {
 				System.out.println(thread.getName());
 				
 				//PROBLEMA!!!!!!!!!!!!!!!!
-				
-				
+				//
+				//
+				//
+				//
+				//
+				//
+				//
+				//
+				//
+				//
+				//
+				///
+				//
+				///
+				//
+				//
+				///
+				//
+				//
 				if (cont != 10) {
 					System.out.println("cont: " + cont);
 					n = (int) (Math.random() * 9);
