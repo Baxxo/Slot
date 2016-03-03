@@ -20,6 +20,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.eclipse.swt.widgets.Text;
  
 
 
@@ -35,6 +36,9 @@ public class main extends TimerTask {
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	private Text txtCredito;
+	private Text txtBet;
+	private Text txtVincita;
 
 	/**
 	 * Launch the application.
@@ -152,6 +156,53 @@ public class main extends TimerTask {
 
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_2.setBounds(512, 10, 234, 358);
+		
+		Button btnBetMax = new Button(shell, SWT.NONE);
+		btnBetMax.setBounds(899, 46, 75, 25);
+		formToolkit.adapt(btnBetMax, true, true);
+		btnBetMax.setText("Bet Max");
+		
+		Button btnBetOne = new Button(shell, SWT.NONE);
+		btnBetOne.setBounds(899, 86, 75, 25);
+		formToolkit.adapt(btnBetOne, true, true);
+		btnBetOne.setText("Bet One");
+		
+		Button btnPayTable = new Button(shell, SWT.NONE);
+		btnPayTable.setBounds(899, 125, 75, 25);
+		formToolkit.adapt(btnPayTable, true, true);
+		btnPayTable.setText("Pay Table");
+		
+		Button btnReset = new Button(shell, SWT.NONE);
+		btnReset.setBounds(899, 166, 75, 25);
+		formToolkit.adapt(btnReset, true, true);
+		btnReset.setText("Reset");
+		
+		Label lblCredito = new Label(shell, SWT.NONE);
+		lblCredito.setBounds(29, 408, 52, 15);
+		formToolkit.adapt(lblCredito, true, true);
+		lblCredito.setText("Credito: ");
+		
+		txtCredito = new Text(shell, SWT.BORDER);
+		txtCredito.setBounds(79, 402, 76, 21);
+		formToolkit.adapt(txtCredito, true, true);
+		
+		Label lblBet = new Label(shell, SWT.NONE);
+		lblBet.setBounds(185, 408, 35, 15);
+		formToolkit.adapt(lblBet, true, true);
+		lblBet.setText("Bet: ");
+		
+		txtBet = new Text(shell, SWT.BORDER);
+		txtBet.setBounds(215, 402, 76, 21);
+		formToolkit.adapt(txtBet, true, true);
+		
+		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
+		lblNewLabel_3.setBounds(320, 408, 52, 15);
+		formToolkit.adapt(lblNewLabel_3, true, true);
+		lblNewLabel_3.setText("Vincita: ");
+		
+		txtVincita = new Text(shell, SWT.BORDER);
+		txtVincita.setBounds(374, 402, 76, 21);
+		formToolkit.adapt(txtVincita, true, true);
 
 	}
 
