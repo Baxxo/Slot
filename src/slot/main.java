@@ -28,15 +28,15 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
-	private int cont;
 
-	int n;
+	int[] n = new int[4];
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
-	private Text txtCredito;
 	private Text txtBet;
 	private Text txtVincita;
+	private Label label;
+	private double credit = 100;
 
 	/**
 	 * Launch the application.
@@ -102,12 +102,12 @@ public class main extends TimerTask implements Runnable {
 							// TODO Auto-generated method stub
 							Display.getDefault().asyncExec(new Runnable() {
 								public void run() {
-									n = (int) (Math.random() * 9);
-									lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-									n = (int) (Math.random() * 9);
-									lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-									n = (int) (Math.random() * 9);
-									lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
+									n[0] = (int) (Math.random() * 9);
+									lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
+									n[1] = (int) (Math.random() * 9);
+									lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
+									n[2] = (int) (Math.random() * 9);
+									lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
 								}
 							});
 							try {
@@ -119,49 +119,31 @@ public class main extends TimerTask implements Runnable {
 							System.out.println(i);
 						}
 
+						n[0] = (int) (Math.random() * 9);
+						n[1] = (int) (Math.random() * 9);
+						n[2] = (int) (Math.random() * 9);
+
+						System.out.println("n1: " + n[0]);
+						System.out.println("n2: " + n[1]);
+						System.out.println("n3: " + n[2]);
+						Display.getDefault().asyncExec(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
+								lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
+								lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
+							}
+
+						});
+
 					}
 				};
 
-				thread.start();	
-
-				System.out.println(thread.getName());
+				thread.start();
 				
-				//PROBLEMA!!!!!!!!!!!!!!!!
-				//
-				//
-				//
-				//
-				//
-				//
-				//
-				//
-				//
-				//
-				//
-				///
-				//
-				///
-				//
-				//
-				///
-				//
-				//
-				if (cont != 10) {
-					System.out.println("cont: " + cont);
-					n = (int) (Math.random() * 9);
-					lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					n = (int) (Math.random() * 9);
-					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					n = (int) (Math.random() * 9);
-					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					cont++;
-				} else {
-					n = (int) (Math.random() * 9);
-					lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n)));
-					cont = 0;
-				}	
+				label.setText(""+credit);
 
 			}
 		});
@@ -176,53 +158,60 @@ public class main extends TimerTask implements Runnable {
 
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_2.setBounds(512, 10, 234, 358);
-		
+
 		Button btnBetMax = new Button(shell, SWT.NONE);
 		btnBetMax.setBounds(899, 46, 75, 25);
 		formToolkit.adapt(btnBetMax, true, true);
 		btnBetMax.setText("Bet Max");
-		
+
 		Button btnBetOne = new Button(shell, SWT.NONE);
 		btnBetOne.setBounds(899, 86, 75, 25);
 		formToolkit.adapt(btnBetOne, true, true);
 		btnBetOne.setText("Bet One");
-		
+
 		Button btnPayTable = new Button(shell, SWT.NONE);
 		btnPayTable.setBounds(899, 125, 75, 25);
 		formToolkit.adapt(btnPayTable, true, true);
 		btnPayTable.setText("Pay Table");
-		
+
 		Button btnReset = new Button(shell, SWT.NONE);
+		btnReset.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+			}
+		});
 		btnReset.setBounds(899, 166, 75, 25);
 		formToolkit.adapt(btnReset, true, true);
 		btnReset.setText("Reset");
-		
+
 		Label lblCredito = new Label(shell, SWT.NONE);
 		lblCredito.setBounds(29, 408, 52, 15);
 		formToolkit.adapt(lblCredito, true, true);
 		lblCredito.setText("Credito: ");
-		
-		txtCredito = new Text(shell, SWT.BORDER);
-		txtCredito.setBounds(79, 402, 76, 21);
-		formToolkit.adapt(txtCredito, true, true);
-		
+
 		Label lblBet = new Label(shell, SWT.NONE);
 		lblBet.setBounds(185, 408, 35, 15);
 		formToolkit.adapt(lblBet, true, true);
 		lblBet.setText("Bet: ");
-		
+
 		txtBet = new Text(shell, SWT.BORDER);
 		txtBet.setBounds(215, 402, 76, 21);
 		formToolkit.adapt(txtBet, true, true);
-		
+
 		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
 		lblNewLabel_3.setBounds(320, 408, 52, 15);
 		formToolkit.adapt(lblNewLabel_3, true, true);
 		lblNewLabel_3.setText("Vincita: ");
-		
+
 		txtVincita = new Text(shell, SWT.BORDER);
 		txtVincita.setBounds(374, 402, 76, 21);
 		formToolkit.adapt(txtVincita, true, true);
+		
+		label = new Label(shell, SWT.NONE);
+		label.setBounds(81, 408, 55, 15);
+		formToolkit.adapt(label, true, true);
+		
+		label.setText(""+credit);
 
 	}
 
