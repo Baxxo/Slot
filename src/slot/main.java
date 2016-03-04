@@ -20,6 +20,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.widgets.Text;
 
 public class main extends TimerTask implements Runnable {
@@ -37,7 +40,7 @@ public class main extends TimerTask implements Runnable {
 	private Text txtBet;
 	private Label txtVincita;
 	private Label label;
-	private double credit = 100;
+	private double credito = 100;
 	private double vincita;
 	private double bet;
 
@@ -94,61 +97,84 @@ public class main extends TimerTask implements Runnable {
 			@Override
 			public void mouseDown(MouseEvent e) {
 
-				Thread thread = new Thread() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						for (int i = 0; i < 10; i++) {
+				if (credito == 0) {
+					JOptionPane.showMessageDialog(null, "HAI PERSO!");
+				} else {
+					try {
+						bet = Double.parseDouble(txtBet.getText());
+					} catch (NumberFormatException e2) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "SCOMMETTI!!!!");
+					}
+
+					System.out.println("BET: " + txtBet.getText());
+
+					Thread thread = new Thread() {
+						@Override
+						public void run() {
 							// TODO Auto-generated method stub
+							for (int i = 0; i < 10; i++) {
+								// TODO Auto-generated method stub
+								Display.getDefault().asyncExec(new Runnable() {
+									public void run() {
+										n[0] = (int) (Math.random() * 9);
+										lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
+										n[1] = (int) (Math.random() * 9);
+										lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
+										n[2] = (int) (Math.random() * 9);
+										lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
+										n[3] = (int) (Math.random() * 9);
+										lblNewLabel_3.setImage(SWTResourceManager.getImage(main.class, img.get(n[3])));
+									}
+								});
+								try {
+									Thread.sleep(80);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									Thread.currentThread().interrupt();
+								}
+								System.out.println(i);
+							}
+
+							n[0] = (int) (Math.random() * 9);
+							n[1] = (int) (Math.random() * 9);
+							n[2] = (int) (Math.random() * 9);
+							n[3] = (int) (Math.random() * 9);
+
 							Display.getDefault().asyncExec(new Runnable() {
+
+								@Override
 								public void run() {
-									n[0] = (int) (Math.random() * 9);
+									// TODO Auto-generated method stub
 									lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
-									n[1] = (int) (Math.random() * 9);
 									lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
-									n[2] = (int) (Math.random() * 9);
 									lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
-									n[3] = (int) (Math.random() * 9);
 									lblNewLabel_3.setImage(SWTResourceManager.getImage(main.class, img.get(n[3])));
 								}
+
 							});
-							try {
-								Thread.sleep(80);
-							} catch (InterruptedException e1) {
-								// TODO Auto-generated catch block
-								Thread.currentThread().interrupt();
+
+							vincita = vincit(n, bet);
+							if (vincita == 0) {
+								credito = credito - bet;
+							} else {
+								credito = credito + vincita;
 							}
-							System.out.println(i);
+							Display.getDefault().asyncExec(new Runnable() {
+
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									System.out.println(credito);
+									label.setText("" + credito);
+								}
+							});
+
 						}
+					};
 
-						n[0] = (int) (Math.random() * 9);
-						n[1] = (int) (Math.random() * 9);
-						n[2] = (int) (Math.random() * 9);
-						n[3] = (int) (Math.random() * 9);
-
-						Display.getDefault().asyncExec(new Runnable() {
-
-							@Override
-							public void run() {
-								// TODO Auto-generated method stub
-								lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
-								lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
-								lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
-								lblNewLabel_3.setImage(SWTResourceManager.getImage(main.class, img.get(n[3])));
-							}
-
-						});						
-
-						vincit(n);
-						
-						
-						
-
-					}
-				};
-
-				thread.start();				
-				
+					thread.start();
+				}
 			}
 		});
 		btnGira.setBounds(995, 10, 75, 25);
@@ -162,7 +188,7 @@ public class main extends TimerTask implements Runnable {
 
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_2.setBounds(490, 10, 234, 358);
-		
+
 		lblNewLabel_3 = formToolkit.createLabel(shell, "", SWT.NONE);
 		lblNewLabel_3.setBounds(730, 10, 234, 358);
 
@@ -213,13 +239,12 @@ public class main extends TimerTask implements Runnable {
 		txtVincita = new Label(shell, SWT.BORDER);
 		txtVincita.setBounds(374, 402, 76, 21);
 		formToolkit.adapt(txtVincita, true, true);
-		
+
 		label = new Label(shell, SWT.NONE);
 		label.setBounds(81, 408, 55, 15);
 		formToolkit.adapt(label, true, true);
-		
-		label.setText(""+credit);
-		
+
+		label.setText("" + credito);
 
 	}
 
@@ -228,13 +253,31 @@ public class main extends TimerTask implements Runnable {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public double vincit(int[] n){
-		double vin=0;
-		System.out.println("n1: " + n[0]);
-		System.out.println("n2: " + n[1]);
-		System.out.println("n3: " + n[2]);
-		System.out.println("n4: " + n[3]);
+
+	public double vincit(int[] n, double b) {
+		double vin = 0;
+		int coppie = 0;
+
+		for (int i = 1; i < 4; i++) {
+			if (n[0] == n[i]) {
+				coppie++;
+			}
+		}
+
+		System.out.println("coppie: " + coppie);
+		if (coppie == 0) {
+			vin = 0;
+		}
+		if (coppie == 1) {
+			vin = b * 0.2;
+		}
+		if (coppie == 2) {
+			vin = b * 0.5;
+		}
+		if (coppie == 3) {
+			vin = b;
+		}
+		System.out.println("vin: " + vin);
 		return vin;
 	}
 }
