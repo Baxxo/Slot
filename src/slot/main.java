@@ -211,6 +211,12 @@ public class main extends TimerTask implements Runnable {
 		btnReset.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				credit=100;
+				bet=0;
+				vincita=0;
+				txtVincita.setText(" ");
+				txtBet.setText(" ");
+				
 			}
 		});
 		btnReset.setBounds(995, 250, 75, 25);
