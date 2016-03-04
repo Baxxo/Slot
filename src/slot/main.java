@@ -28,15 +28,18 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel;
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
+	public Label lblNewLabel_3;
 
 	int[] n = new int[4];
 
 	protected Shell shell;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	private Text txtBet;
-	private Text txtVincita;
+	private Label txtVincita;
 	private Label label;
 	private double credit = 100;
+	private double vincita;
+	private double bet;
 
 	/**
 	 * Launch the application.
@@ -44,9 +47,6 @@ public class main extends TimerTask implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		TimerTask timerTask = new TimerTaskExample();
-		Timer timer = new Timer(true);
-		// timer.scheduleAtFixedRate(timerTask, 0, 10 * 1000);
 		try {
 			main window = new main();
 			window.open();
@@ -75,7 +75,7 @@ public class main extends TimerTask implements Runnable {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(1000, 500);
+		shell.setSize(1117, 500);
 		shell.setText("SWT Application");
 
 		img.add("/slot/bar.png");
@@ -108,6 +108,8 @@ public class main extends TimerTask implements Runnable {
 									lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
 									n[2] = (int) (Math.random() * 9);
 									lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
+									n[3] = (int) (Math.random() * 9);
+									lblNewLabel_3.setImage(SWTResourceManager.getImage(main.class, img.get(n[3])));
 								}
 							});
 							try {
@@ -122,10 +124,8 @@ public class main extends TimerTask implements Runnable {
 						n[0] = (int) (Math.random() * 9);
 						n[1] = (int) (Math.random() * 9);
 						n[2] = (int) (Math.random() * 9);
+						n[3] = (int) (Math.random() * 9);
 
-						System.out.println("n1: " + n[0]);
-						System.out.println("n2: " + n[1]);
-						System.out.println("n3: " + n[2]);
 						Display.getDefault().asyncExec(new Runnable() {
 
 							@Override
@@ -134,43 +134,50 @@ public class main extends TimerTask implements Runnable {
 								lblNewLabel.setImage(SWTResourceManager.getImage(main.class, img.get(n[0])));
 								lblNewLabel_1.setImage(SWTResourceManager.getImage(main.class, img.get(n[1])));
 								lblNewLabel_2.setImage(SWTResourceManager.getImage(main.class, img.get(n[2])));
+								lblNewLabel_3.setImage(SWTResourceManager.getImage(main.class, img.get(n[3])));
 							}
 
-						});
+						});						
+
+						vincit(n);
+						
+						
+						
 
 					}
 				};
 
-				thread.start();
+				thread.start();				
 				
-				label.setText(""+credit);
-
 			}
 		});
-		btnGira.setBounds(899, 10, 75, 25);
+		btnGira.setBounds(995, 10, 75, 25);
 		btnGira.setText("GIRA!");
 
 		lblNewLabel = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel.setBounds(10, 10, 256, 358);
+		lblNewLabel.setBounds(10, 10, 234, 358);
 
 		lblNewLabel_1 = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel_1.setBounds(272, 10, 234, 358);
+		lblNewLabel_1.setBounds(250, 10, 234, 358);
 
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
-		lblNewLabel_2.setBounds(512, 10, 234, 358);
+		lblNewLabel_2.setBounds(490, 10, 234, 358);
+		
+		lblNewLabel_3 = formToolkit.createLabel(shell, "", SWT.NONE);
+		lblNewLabel_3.setBounds(730, 10, 234, 358);
 
 		Button btnBetMax = new Button(shell, SWT.NONE);
-		btnBetMax.setBounds(899, 46, 75, 25);
+		btnBetMax.setBounds(995, 70, 75, 25);
 		formToolkit.adapt(btnBetMax, true, true);
 		btnBetMax.setText("Bet Max");
 
 		Button btnBetOne = new Button(shell, SWT.NONE);
-		btnBetOne.setBounds(899, 86, 75, 25);
+		btnBetOne.setBounds(995, 130, 75, 25);
 		formToolkit.adapt(btnBetOne, true, true);
 		btnBetOne.setText("Bet One");
 
 		Button btnPayTable = new Button(shell, SWT.NONE);
-		btnPayTable.setBounds(899, 125, 75, 25);
+		btnPayTable.setBounds(995, 190, 75, 25);
 		formToolkit.adapt(btnPayTable, true, true);
 		btnPayTable.setText("Pay Table");
 
@@ -186,7 +193,7 @@ public class main extends TimerTask implements Runnable {
 				
 			}
 		});
-		btnReset.setBounds(899, 166, 75, 25);
+		btnReset.setBounds(995, 250, 75, 25);
 		formToolkit.adapt(btnReset, true, true);
 		btnReset.setText("Reset");
 
@@ -209,7 +216,7 @@ public class main extends TimerTask implements Runnable {
 		formToolkit.adapt(lblNewLabel_3, true, true);
 		lblNewLabel_3.setText("Vincita: ");
 
-		txtVincita = new Text(shell, SWT.BORDER);
+		txtVincita = new Label(shell, SWT.BORDER);
 		txtVincita.setBounds(374, 402, 76, 21);
 		formToolkit.adapt(txtVincita, true, true);
 		
@@ -218,6 +225,7 @@ public class main extends TimerTask implements Runnable {
 		formToolkit.adapt(label, true, true);
 		
 		label.setText(""+credit);
+		
 
 	}
 
@@ -225,5 +233,14 @@ public class main extends TimerTask implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public double vincit(int[] n){
+		double vin=0;
+		System.out.println("n1: " + n[0]);
+		System.out.println("n2: " + n[1]);
+		System.out.println("n3: " + n[2]);
+		System.out.println("n4: " + n[3]);
+		return vin;
 	}
 }
