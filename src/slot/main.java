@@ -140,6 +140,8 @@ public class main extends TimerTask implements Runnable {
 							n[1] = (int) (Math.random() * 9);
 							n[2] = (int) (Math.random() * 9);
 							n[3] = (int) (Math.random() * 9);
+							
+							//n[0] = n[1] = n[2] = n[3] = 1;
 
 							Display.getDefault().asyncExec(new Runnable() {
 
@@ -211,12 +213,12 @@ public class main extends TimerTask implements Runnable {
 		btnReset.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				credito=100;
-				bet=0;
-				vincita=0;
+				credito = 100;
+				bet = 0;
+				vincita = 0;
 				txtVincita.setText(" ");
 				txtBet.setText(" ");
-				
+
 			}
 		});
 		btnReset.setBounds(995, 250, 75, 25);
@@ -254,36 +256,55 @@ public class main extends TimerTask implements Runnable {
 
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public double vincit(int[] n, double b) {
 		double vin = 0;
 		int coppie = 0;
+		boolean find = false;
+		int n_find=0;
 
-		for (int i = 1; i < 4; i++) {
-			if (n[0] == n[i]) {
-				coppie++;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (n[i] == n[j]) {
+					find = true;
+					n_find = i;
+					break;
+				}
 			}
 		}
+		
+		if(find == true){
+			for(int i=0;i<4;i++){
+				if (n[n_find] == n[i]){
+					coppie++;
+				}
+			}
+		}
+		
+		coppie--;
 
-		System.out.println("coppie: " + coppie);
+
 		if (coppie == 0) {
 			vin = 0;
 		}
 		if (coppie == 1) {
 			vin = b * 0.2;
+			System.out.println("coppia");
 		}
 		if (coppie == 2) {
 			vin = b * 0.5;
+			System.out.println("tris");
 		}
 		if (coppie == 3) {
 			vin = b;
+			System.out.println("figata");
 		}
 		System.out.println("vin: " + vin);
 		return vin;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
