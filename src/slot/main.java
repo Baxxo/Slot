@@ -33,7 +33,7 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	public Label lblNewLabel_3;
-	SoundClipTest st = new SoundClipTest();
+	static SoundClipTest st = new SoundClipTest();
 
 	int[] n = new int[4];
 
@@ -45,6 +45,7 @@ public class main extends TimerTask implements Runnable {
 	private double credito = 100;
 	private double vincita;
 	private double bet;
+	private String title;
 
 	/**
 	 * Launch the application.
@@ -55,6 +56,7 @@ public class main extends TimerTask implements Runnable {
 		try {
 			main window = new main();
 			window.open();
+			st.sound("/slot/inizio.wav");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,6 +100,7 @@ public class main extends TimerTask implements Runnable {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+				
 
 				if (credito == 0) {
 					JOptionPane.showMessageDialog(null, "HAI PERSO!");
@@ -114,6 +117,7 @@ public class main extends TimerTask implements Runnable {
 					Thread thread = new Thread() {
 						@Override
 						public void run() {
+							st.sound("/slot/giro.wav");
 							// TODO Auto-generated method stub
 							for (int i = 0; i < 10; i++) {
 								// TODO Auto-generated method stub
@@ -255,17 +259,6 @@ public class main extends TimerTask implements Runnable {
 		formToolkit.adapt(label, true, true);
 
 		label.setText("" + credito);
-		
-		Button btnSound = new Button(shell, SWT.NONE);
-		btnSound.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				st.sound();
-			}
-		});
-		btnSound.setBounds(635, 409, 75, 25);
-		formToolkit.adapt(btnSound, true, true);
-		btnSound.setText("sound");
 
 	}
 
@@ -309,6 +302,7 @@ public class main extends TimerTask implements Runnable {
 		}
 		if (coppie == 3) {
 			vin = b;
+			st.sound("/slot/vittoria.wav");
 			System.out.println("figata");
 		}
 		System.out.println("vin: " + vin);
