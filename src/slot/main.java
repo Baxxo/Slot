@@ -24,6 +24,8 @@ import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class main extends TimerTask implements Runnable {
 
@@ -195,19 +197,28 @@ public class main extends TimerTask implements Runnable {
 		lblNewLabel_3.setBounds(730, 10, 234, 358);
 
 		Button btnBetMax = new Button(shell, SWT.NONE);
+		btnBetMax.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				bet=credito;
+				txtBet.setText(Double.toString(credito));
+			}
+		});
 		btnBetMax.setBounds(995, 70, 75, 25);
 		formToolkit.adapt(btnBetMax, true, true);
 		btnBetMax.setText("Bet Max");
 
 		Button btnBetOne = new Button(shell, SWT.NONE);
+		btnBetOne.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				bet=1;
+				txtBet.setText("1");
+			}
+		});
 		btnBetOne.setBounds(995, 130, 75, 25);
 		formToolkit.adapt(btnBetOne, true, true);
 		btnBetOne.setText("Bet One");
-
-		Button btnPayTable = new Button(shell, SWT.NONE);
-		btnPayTable.setBounds(995, 190, 75, 25);
-		formToolkit.adapt(btnPayTable, true, true);
-		btnPayTable.setText("Pay Table");
 
 		Button btnReset = new Button(shell, SWT.NONE);
 		btnReset.addMouseListener(new MouseAdapter() {
@@ -221,7 +232,7 @@ public class main extends TimerTask implements Runnable {
 
 			}
 		});
-		btnReset.setBounds(995, 250, 75, 25);
+		btnReset.setBounds(995, 191, 75, 25);
 		formToolkit.adapt(btnReset, true, true);
 		btnReset.setText("Reset");
 
