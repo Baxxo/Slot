@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.eclipse.swt.widgets.Text;
@@ -34,6 +35,7 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	public Label lblNewLabel_3;
+	SoundClipTest st = new SoundClipTest();
 
 	int[] n = new int[4];
 
@@ -264,6 +266,17 @@ public class main extends TimerTask implements Runnable {
 		formToolkit.adapt(label, true, true);
 
 		label.setText("" + credito);
+		
+		Button btnSound = new Button(shell, SWT.NONE);
+		btnSound.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				st.sound();
+			}
+		});
+		btnSound.setBounds(635, 409, 75, 25);
+		formToolkit.adapt(btnSound, true, true);
+		btnSound.setText("sound");
 
 	}
 
