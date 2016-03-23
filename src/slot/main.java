@@ -35,8 +35,7 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	public Label lblNewLabel_3;
-	static SoundClipTest st = new SoundClipTest();
-
+	SoundClipTest st;
 	int[] n = new int[4];
 
 	protected Shell shell;
@@ -58,7 +57,6 @@ public class main extends TimerTask implements Runnable {
 		try {
 			main window = new main();
 			window.open();
-			st.sound("/slot/inizio.wav");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,6 +69,7 @@ public class main extends TimerTask implements Runnable {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
+		//st.sound("/slot/inizio.wav");
 		shell.layout();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -101,7 +100,7 @@ public class main extends TimerTask implements Runnable {
 		btnGira.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseDown(MouseEvent e) {
+			public void mouseDown(MouseEvent e) {			
 				
 
 				if (credito == 0) {
@@ -110,18 +109,22 @@ public class main extends TimerTask implements Runnable {
 					try {
 						bet = Double.parseDouble(txtBet.getText());
 					} catch (NumberFormatException e2) {
-						// TODO Auto-generated catch block
+						// TODO Auto-generated catch block						
 						JOptionPane.showMessageDialog(null, "SCOMMETTI!!!!");
+						bet = 10;
 					}
 
 					System.out.println("BET: " + txtBet.getText());
 
 					Thread thread = new Thread() {
-						@Override
 						public void run() {
-							st.sound("/slot/giro.wav");
+							Display.getDefault().asyncExec(new Runnable(){
+								public void run(){
+									//st.sound("/slot/giro.wav");									
+								}
+							});
 							// TODO Auto-generated method stub
-							for (int i = 0; i < 10; i++) {
+							for (int i = 0; i < 40; i++) {
 								// TODO Auto-generated method stub
 								Display.getDefault().asyncExec(new Runnable() {
 									public void run() {
@@ -149,7 +152,6 @@ public class main extends TimerTask implements Runnable {
 							n[2] = (int) (Math.random() * 9);
 							n[3] = (int) (Math.random() * 9);
 							
-							//n[0] = n[1] = n[2] = n[3] = 1;
 
 							Display.getDefault().asyncExec(new Runnable() {
 
@@ -313,7 +315,7 @@ public class main extends TimerTask implements Runnable {
 		}
 		if (coppie == 3) {
 			vin = b;
-			st.sound("/slot/vittoria.wav");
+			//st.sound("/slot/vittoria.wav");
 			System.out.println("figata");
 		}
 		System.out.println("vin: " + vin);
