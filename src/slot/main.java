@@ -82,6 +82,7 @@ public class main extends TimerTask implements Runnable {
 	 */
 	protected void createContents() {
 		shell = new Shell();
+		shell.setImage(SWTResourceManager.getImage(main.class, "/slot/download.jpg"));
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		shell.setSize(1117, 500);
 		shell.setText("SWT Application");
