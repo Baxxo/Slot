@@ -54,7 +54,7 @@ public class main extends TimerTask implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {			
+		try {
 			main window = new main();
 			window.open();
 		} catch (Exception e) {
@@ -82,14 +82,9 @@ public class main extends TimerTask implements Runnable {
 	 */
 	protected void createContents() {
 		shell = new Shell();
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		shell.setSize(1117, 500);
 		shell.setText("SWT Application");
-		Display.getDefault().asyncExec(new Runnable(){
-			public void run(){
-				st.SoundClipTest("/slot/inizio.wav");
-			}
-		});
-
 
 		img.add("/slot/bar.png");
 		img.add("/slot/campana.png");
@@ -102,19 +97,18 @@ public class main extends TimerTask implements Runnable {
 		img.add("/slot/ua.png");
 
 		Button btnGira = new Button(shell, SWT.NONE);
+		btnGira.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		btnGira.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseDown(MouseEvent e) {			
-				
-
+			public void mouseDown(MouseEvent e) {
 				if (credito == 0) {
 					JOptionPane.showMessageDialog(null, "HAI PERSO!");
 				} else {
 					try {
 						bet = Double.parseDouble(txtBet.getText());
 					} catch (NumberFormatException e2) {
-						// TODO Auto-generated catch block						
+						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "SCOMMETTI!!!!");
 						bet = 10;
 					}
@@ -143,17 +137,14 @@ public class main extends TimerTask implements Runnable {
 									// TODO Auto-generated catch block
 									Thread.currentThread().interrupt();
 								}
-								System.out.println(i);
 							}
-							
-							
+
 							n[0] = (int) (Math.random() * 9);
 							n[1] = (int) (Math.random() * 9);
 							n[2] = (int) (Math.random() * 9);
 							n[3] = (int) (Math.random() * 9);
-							
-							
-							//n[0]=n[1]=n[2]=n[3]=0;
+
+							 //n[0]=n[1]=n[2]=n[3]=0;
 
 							Display.getDefault().asyncExec(new Runnable() {
 
@@ -195,22 +186,28 @@ public class main extends TimerTask implements Runnable {
 		btnGira.setText("GIRA!");
 
 		lblNewLabel = formToolkit.createLabel(shell, "", SWT.NONE);
+		lblNewLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		lblNewLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel.setBounds(10, 10, 234, 358);
 
 		lblNewLabel_1 = formToolkit.createLabel(shell, "", SWT.NONE);
+		lblNewLabel_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_1.setBounds(250, 10, 234, 358);
 
 		lblNewLabel_2 = formToolkit.createLabel(shell, "", SWT.NONE);
+		lblNewLabel_2.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_2.setBounds(490, 10, 234, 358);
 
 		lblNewLabel_3 = formToolkit.createLabel(shell, "", SWT.NONE);
+		lblNewLabel_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNewLabel_3.setBounds(730, 10, 234, 358);
 
 		Button btnBetMax = new Button(shell, SWT.NONE);
+		btnBetMax.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		btnBetMax.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				bet=credito;
+				bet = credito;
 				txtBet.setText(Double.toString(credito));
 			}
 		});
@@ -219,10 +216,11 @@ public class main extends TimerTask implements Runnable {
 		btnBetMax.setText("Bet Max");
 
 		Button btnBetOne = new Button(shell, SWT.NONE);
+		btnBetOne.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		btnBetOne.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				bet=1;
+				bet = 1;
 				txtBet.setText("1");
 			}
 		});
@@ -231,6 +229,7 @@ public class main extends TimerTask implements Runnable {
 		btnBetOne.setText("Bet One");
 
 		Button btnReset = new Button(shell, SWT.NONE);
+		btnReset.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		btnReset.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -247,33 +246,45 @@ public class main extends TimerTask implements Runnable {
 		btnReset.setText("Reset");
 
 		Label lblCredito = new Label(shell, SWT.NONE);
+		lblCredito.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblCredito.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblCredito.setBounds(29, 408, 52, 15);
 		formToolkit.adapt(lblCredito, true, true);
 		lblCredito.setText("Credito: ");
 
 		Label lblBet = new Label(shell, SWT.NONE);
+		lblBet.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblBet.setBounds(185, 408, 35, 15);
 		formToolkit.adapt(lblBet, true, true);
 		lblBet.setText("Bet: ");
 
 		txtBet = new Text(shell, SWT.BORDER);
-		txtBet.setBounds(215, 402, 76, 21);
+		txtBet.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		txtBet.setBounds(227, 408, 75, 15);
 		formToolkit.adapt(txtBet, true, true);
 
 		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
+		lblNewLabel_3.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblNewLabel_3.setBounds(320, 408, 52, 15);
 		formToolkit.adapt(lblNewLabel_3, true, true);
 		lblNewLabel_3.setText("Vincita: ");
 
 		txtVincita = new Label(shell, SWT.BORDER);
-		txtVincita.setBounds(374, 402, 76, 21);
+		txtVincita.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		txtVincita.setBounds(378, 407, 75, 16);
 		formToolkit.adapt(txtVincita, true, true);
 
 		label = new Label(shell, SWT.NONE);
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		label.setBounds(81, 408, 55, 15);
 		formToolkit.adapt(label, true, true);
 
 		label.setText("" + credito);
+
+		btnBetMax.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnBetOne.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnGira.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnReset.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 
 	}
 
@@ -281,28 +292,31 @@ public class main extends TimerTask implements Runnable {
 		double vin = 0;
 		int coppie = 0;
 		boolean find = false;
-		int n_find=0;
+		int n_find = 0;
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (n[i] == n[j]) {
-					find = true;
-					n_find = i;
-					break;
+				if(i!=j){
+					if (n[i] == n[j]) {
+						find = true;
+						n_find = i;
+					}					
 				}
 			}
 		}
-		
-		if(find == true){
-			for(int i=0;i<4;i++){
-				if (n[n_find] == n[i]){
+
+		if (find == true) {
+			for (int i = 0; i < 4; i++) {
+				if (n[n_find] == n[i]) {
 					coppie++;
 				}
 			}
 		}
-		
-		coppie--;
 
+		if(coppie!=0){
+			coppie -= 1;			
+		}
+		System.out.println("coppie: " + coppie);
 
 		if (coppie == 0) {
 			vin = 0;
@@ -327,6 +341,6 @@ public class main extends TimerTask implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("ciao");
 	}
 }
