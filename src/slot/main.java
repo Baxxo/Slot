@@ -35,7 +35,7 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	public Label lblNewLabel_3;
-	static SoundClipTest st;
+	public SoundClipTest st = new SoundClipTest();
 	int[] n = new int[4];
 
 	protected Shell shell;
@@ -86,7 +86,7 @@ public class main extends TimerTask implements Runnable {
 		shell.setText("SWT Application");
 		Display.getDefault().asyncExec(new Runnable(){
 			public void run(){
-				st.sound("/slot/inizio.wav");
+				st.SoundClipTest("/slot/inizio.wav");
 			}
 		});
 
@@ -119,15 +119,9 @@ public class main extends TimerTask implements Runnable {
 						bet = 10;
 					}
 
-					System.out.println("BET: " + txtBet.getText());
-
 					Thread thread = new Thread() {
 						public void run() {
-							Display.getDefault().asyncExec(new Runnable(){
-								public void run(){
-									st.sound("/slot/giro.wav");									
-								}
-							});
+							st.SoundClipTest("/slot/giro.wav");
 							// TODO Auto-generated method stub
 							for (int i = 0; i < 50; i++) {
 								// TODO Auto-generated method stub
@@ -151,12 +145,15 @@ public class main extends TimerTask implements Runnable {
 								}
 								System.out.println(i);
 							}
-
+							
+							
 							n[0] = (int) (Math.random() * 9);
 							n[1] = (int) (Math.random() * 9);
 							n[2] = (int) (Math.random() * 9);
 							n[3] = (int) (Math.random() * 9);
 							
+							
+							//n[0]=n[1]=n[2]=n[3]=0;
 
 							Display.getDefault().asyncExec(new Runnable() {
 
@@ -320,7 +317,7 @@ public class main extends TimerTask implements Runnable {
 		}
 		if (coppie == 3) {
 			vin = b;
-			//st.sound("/slot/vittoria.wav");
+			st.SoundClipTest("/slot/vittoria.wav");
 			System.out.println("figata");
 		}
 		System.out.println("vin: " + vin);

@@ -11,13 +11,17 @@ import javax.swing.*;
 public class SoundClipTest extends JFrame {
 
 	// Constructor
-	public SoundClipTest(String title) {
+	public SoundClipTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void SoundClipTest(String title) {
+		// TODO Auto-generated method stub
 		try {
 			// Open an audio input stream.
 			// File soundFile = new File(); //you could also get the sound file
 			// with an URL
-			AudioInputStream audioIn = AudioSystem
-					.getAudioInputStream(getClass().getResourceAsStream(title));
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(title));
 			// Get a sound clip resource.
 			Clip clip = AudioSystem.getClip();
 			// Open audio clip and load samples from the audio input stream.
@@ -30,13 +34,6 @@ public class SoundClipTest extends JFrame {
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public SoundClipTest() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public void sound(String t) {
-		new SoundClipTest(t);
+		
 	}
 }
