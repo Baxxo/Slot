@@ -35,7 +35,7 @@ public class main extends TimerTask implements Runnable {
 	public Label lblNewLabel_1;
 	public Label lblNewLabel_2;
 	public Label lblNewLabel_3;
-	SoundClipTest st;
+	static SoundClipTest st;
 	int[] n = new int[4];
 
 	protected Shell shell;
@@ -54,7 +54,7 @@ public class main extends TimerTask implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
+		try {			
 			main window = new main();
 			window.open();
 		} catch (Exception e) {
@@ -69,7 +69,6 @@ public class main extends TimerTask implements Runnable {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
-		//st.sound("/slot/inizio.wav");
 		shell.layout();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -85,6 +84,12 @@ public class main extends TimerTask implements Runnable {
 		shell = new Shell();
 		shell.setSize(1117, 500);
 		shell.setText("SWT Application");
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run(){
+				st.sound("/slot/inizio.wav");
+			}
+		});
+
 
 		img.add("/slot/bar.png");
 		img.add("/slot/campana.png");
@@ -120,11 +125,11 @@ public class main extends TimerTask implements Runnable {
 						public void run() {
 							Display.getDefault().asyncExec(new Runnable(){
 								public void run(){
-									//st.sound("/slot/giro.wav");									
+									st.sound("/slot/giro.wav");									
 								}
 							});
 							// TODO Auto-generated method stub
-							for (int i = 0; i < 40; i++) {
+							for (int i = 0; i < 50; i++) {
 								// TODO Auto-generated method stub
 								Display.getDefault().asyncExec(new Runnable() {
 									public void run() {
